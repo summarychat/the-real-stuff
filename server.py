@@ -89,6 +89,9 @@ def event_json(chat):
     inter = session.query(Event).order_by("timestamp desc").limit(5).all()
     return json.dumps([row.diction() for row in inter])
 
+@app.route('/<path:path>')
+def static_file(path):
+    return app.send_static_file(path)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80)
