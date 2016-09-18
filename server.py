@@ -82,7 +82,7 @@ def message_json(chat):
 @app.route('/events/<chat>', methods=['GET'])
 def event_json(chat):
     session = sessionmaker()
-    inter = session.query(Event).filter(Message.channel == chat).order_by("timestamp desc").limit(5).all()
+    inter = session.query(Event).filter(Event.channel == chat).order_by("timestamp desc").limit(5).all()
     return json.dumps([row.diction() for row in inter])
 
 @app.route('/<path:path>')
