@@ -4,6 +4,8 @@ from flask import Flask, request, flash, url_for, redirect, \
 from flask_sqlalchemy import SQLAlchemy
 import sqlalchemy.orm
 from cockroachdb.sqlalchemy import run_transaction
+import json
+from flask_cors import CORS, cross_origin
 
 DATABASE = {
     'drivername': 'cockroachdb',
@@ -14,6 +16,7 @@ DATABASE = {
 }
 
 app = Flask(__name__)
+CORS(app)
 app.config.from_pyfile('hello.cfg')
 db = SQLAlchemy(app)
 sessionmaker = sqlalchemy.orm.sessionmaker(db.engine)
@@ -33,6 +36,13 @@ class Message(db.Model):
         self.message = message
         self.timestamp = datetime.utcnow()
 
+    def diction(self):
+        d ={}
+        d['channel'] = self.channel
+        d['message'] = self.message
+        d['name'] = self.name
+        return d
+
 class Event(db.Model):
     __tablename__ = 'events'
     id = db.Column('event_id', db.Integer, primary_key=True)
@@ -48,6 +58,14 @@ class Event(db.Model):
         self.message = message
         self.links = links
         self.timestamp = timestamp
+    
+    def diction(self):
+        d ={}
+        d['channel'] = self.channel
+        d['message'] = self.message
+        d['name'] = self.name
+        d['links'] = self.links
+        return d
 
 
 @app.route('/')
@@ -58,14 +76,14 @@ def show_all():
 @app.route('/messages/<chat>', methods=['GET'])
 def message_json(chat):
     session = sessionmaker()
-    result = session.query(Message).order_by("timestamp desc").limit(50).all()
-    return flask.jsonify(json_list = result)
+    result = session.query(Message).order_by("timestamp desc").limit(50)
+    return json.dumps([row.diction() for row in result])
 
 @app.route('/events/<chat>', methods=['GET'])
 def event_json(chat):
     session = sessionmaker()
-    result = session.query(Event).order_by("timestamp desc").limit(5).all()
-    return flask.jsonify(json_list = result)
+    inter = session.query(Event).order_by("timestamp desc").limit(5).all()
+    return json.dumps([row.diction() for row in inter])
 
 
 if __name__ == '__main__':
