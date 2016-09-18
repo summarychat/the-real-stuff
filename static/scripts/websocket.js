@@ -12,25 +12,28 @@ function init() {
   let group = getGroupID();
   window.socket = new WebSocket('ws://' + address + '/' + group + '/' + username);
 
-  $.get('ip/events/' + group, function (data){
-    for (let i = 0; i < data.length; i++) {
-      let sumName = data[i].name;
-      let sumMessage = data[i].message;
+  $.get('http://104.198.100.183' + '/events/' + group, function (data){
+    let parsedData = JSON.parse(data);
+    for (let i = 0; i < parsedData.length; i++) {
+      let sumName = parsedData[i].name;
+      let sumMessage = parsedData[i].message;
 
       appendSummary(sumMessage, sumName)
     }
   });
 
-  $.get('ip/messages/' + group, function (data){
-    for (let i = 0; i < data.length; i++) {
-      let messagesName = data[i].name;
-      let messagesMessage = data[i].message;
+  $.get('http://104.198.100.183' + '/messages/' + group, function (data){
+    let parsedData = JSON.parse(data);
+    for (let i = 0; i < parsedData.length; i++) {
+      let messagesName = parsedData[i].name;
+      let messagesMessage = parsedData[i].message;
+      console.log(messagesName, messagesMessage);
 
       appendMessage(messagesMessage, true, messagesName);
     }
   });
 
-  function appendSummary(message, user) {
+  function appendSummary(message, name) {
     const summaryItem = document.createElement('div');
     const nameParagraph = document.createElement('p');
     nameParagraph.innerText = name;
@@ -38,9 +41,9 @@ function init() {
     const li = document.createElement('li');
     li.innerText = message;
     summaryItem.appendChild(li);
-    summaryItem.className = 'server';
-    $('.chat__summary__list').append(messageItem);
-    $('.chat__summary').scrollTop($('.chat__summary')[0].scrollHeight);
+    summaryItem.className = 'chat__summary__list__item';
+    $('.chat__summary__list').append(summaryItem);
+    $('.chat__summary__list-container').scrollTop($('.chat__summary__list-container')[0].scrollHeight);
   }
 
   const message = {

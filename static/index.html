@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Sumchat</title>
+  <title>Context Chat</title>
   <link rel="stylesheet" href="main.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <script src="https://use.fontawesome.com/5d6290bccb.js"></script>
 </head>
 <body>
   <section id="landing">
-    <h1>Sumchat</h1>
+    <h1>Context Chat</h1>
 
     <p class="landing__intro">Join or create a group to get started.</p>
 
@@ -36,7 +36,7 @@
         <h2>Summary</h2>
         <i class="chat__summary-toggle--mobile-view fa fa-info-circle fa-2x" aria-hidden="true"></i>
       </div>
-      <div class="chat__summary">
+      <div class="chat__summary__list-container">
         <div class="chat__summary__list"></div>
       </div>
     </div>
@@ -45,6 +45,18 @@
   <script src="scripts/jquery.min.js"></script>
   <script src="scripts/main.js"></script>
   <script src="scripts/websocket.js"></script>
-  <script src="scripts/summarized.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/trianglify/0.4.0/trianglify.min.js"></script>
+  <script>
+  function addTriangleTo(target) {
+    var dimensions = target.getClientRects()[0];
+    var pattern = Trianglify({
+        width: dimensions.width,
+        height: dimensions.height
+    });
+    target.style['background-image'] = 'url(' + pattern.png() + ')';
+  }
+
+  addTriangleTo(document.getElementById('landing'));
+  </script>
 </body>
 </html>

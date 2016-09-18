@@ -31,24 +31,23 @@
   width: 75vw
 
   .chat__header
+    background: $blue
     border-bottom: 1px solid grey
     display: flex
     height: 10vh
     text-align: center
 
     h2
+      color: $white
       font-size: 1.5em
+      font-weight: 700
       margin: 0 auto
 
     i
-      color: $blue
+      color: $white
       cursor: pointer
       float: right
       margin-right: 20px
-
-    .chat__summary-toggle
-      &--black
-        color: black
 
     h2, i
       line-height: 10vh
@@ -80,13 +79,15 @@
       font-size: 1.5em
 
     .chat__summary-header
+      background: $blue
       display: block
       height: 10vh
       h2
+        color: $white
         display: block
+        font-weight: 700
         line-height: 10vh
         text-align: center
-        text-decoration: underline
       .chat__summary-toggle--mobile-view
         display: none
 

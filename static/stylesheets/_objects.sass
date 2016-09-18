@@ -39,9 +39,31 @@ input
 
 .chat__messages__list
   .server
-    color: $black
     clear: both
     float: left
     margin-left: 10px
     li
       background: grey
+
+.chat__summary__list
+  margin-left: 15px
+  .chat__summary__list__item
+    margin-top: 2px
+    p
+      margin-top: 2px
+    li
+      background: $blue
+      border-radius: 12px
+      clear: both
+      color: $white
+      display: inline-block
+      font-size: 1.3em
+      font-weight: 300
+      height: 75px
+      margin: 3px auto 3px auto
+      padding: 0.2em 1em
+      width: 80%
+
+@media screen and (max-width: 900px)
+  .chat__summary__list
+    margin-left: 25px
