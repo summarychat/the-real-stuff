@@ -76,13 +76,13 @@ def show_all():
 @app.route('/messages/<chat>', methods=['GET'])
 def message_json(chat):
     session = sessionmaker()
-    result = session.query(Message).filter(Message.channel == chat).order_by("timestamp desc").limit(50)
+    result = session.query(Message).filter(Message.channel == chat).order_by("timestamp desc").limit(50).reverse()
     return json.dumps([row.diction() for row in result])
 
 @app.route('/events/<chat>', methods=['GET'])
 def event_json(chat):
     session = sessionmaker()
-    inter = session.query(Event).filter(Event.channel == chat).order_by("timestamp desc").limit(5).all()
+    inter = session.query(Event).filter(Event.channel == chat).order_by("timestamp desc").limit(5).all().reverse()
     return json.dumps([row.diction() for row in inter])
 
 @app.route('/<path:path>')
