@@ -59,13 +59,13 @@ def show_all():
 def message_json(chat):
     session = sessionmaker()
     result = session.query(Message).order_by("timestamp desc").limit(50).all()
-    return jsonify(json_list = result)
+    return flask.jsonify(json_list = result)
 
 @app.route('/events/<chat>', methods=['GET'])
 def event_json(chat):
     session = sessionmaker()
     result = session.query(Event).order_by("timestamp desc").limit(5).all()
-    return jsonify(json_list = result)
+    return flask.jsonify(json_list = result)
 
 
 if __name__ == '__main__':
