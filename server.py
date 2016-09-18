@@ -76,7 +76,7 @@ def show_all():
 @app.route('/messages/<chat>', methods=['GET'])
 def message_json(chat):
     session = sessionmaker()
-    result = session.query(Message).filter(Message.channel == chat).order_by("timestamp desc").limit(50).reverse()
+    result = session.query(Message).filter(Message.channel == chat).order_by("timestamp desc").limit(50).all().reverse()
     return json.dumps([row.diction() for row in result])
 
 @app.route('/events/<chat>', methods=['GET'])
