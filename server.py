@@ -15,7 +15,7 @@ DATABASE = {
     'database': 'context'
 }
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='')
 CORS(app)
 app.config.from_pyfile('hello.cfg')
 db = SQLAlchemy(app)
@@ -68,6 +68,15 @@ class Event(db.Model):
         return d
 
 
+@app.route('/')
+def show_all():
+    return app.send_static_file('index.html')
+
+@app.route('/scripts/<path:path>')
+def send_js(path):
+    return send_from_directory('js', path)
+
+
 @app.route('/messages/<chat>', methods=['GET'])
 def message_json(chat):
     session = sessionmaker()
@@ -80,9 +89,6 @@ def event_json(chat):
     inter = session.query(Event).order_by("timestamp desc").limit(5).all()
     return json.dumps([row.diction() for row in inter])
 
-@app.route('/<path:path>')
-def static_file(path):
-    return app.send_static_file(path)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80)
