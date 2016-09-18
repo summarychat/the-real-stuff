@@ -70,7 +70,11 @@ class Event(db.Model):
 
 @app.route('/')
 def show_all():
-    return render_template('index.html')
+    return app.send_static_file('index.html')
+
+@app.route('/scripts/<path:path>')
+def send_js(path):
+    return send_from_directory('js', path)
 
 
 @app.route('/messages/<chat>', methods=['GET'])
