@@ -17,6 +17,7 @@ function init() {
     for (let i = 0; i < parsedData.length; i++) {
       let sumName = parsedData[i].name;
       let sumMessage = parsedData[i].message;
+      console.log(sumMessage);
 
       appendSummary(sumMessage, sumName)
     }
@@ -27,7 +28,6 @@ function init() {
     for (let i = 0; i < parsedData.length; i++) {
       let messagesName = parsedData[i].name;
       let messagesMessage = parsedData[i].message;
-      console.log(messagesName, messagesMessage);
 
       appendMessage(messagesMessage, true, messagesName);
     }
