@@ -1,0 +1,47 @@
+button
+  background: $blue
+  border-radius: 4px
+  border: none
+  box-shadow: 0 15px 10px -10px rgba(0,0,0,0.4)
+  color: $white
+  cursor: pointer
+  transition: all 0.7s ease
+  &:hover
+    box-shadow: 0 30px 15px -20px rgba(0,0,0,0.2)
+    transform: translate(0px, -5px)
+  &:focus
+    outline: 0
+  p
+    color: $white
+
+input
+  border: 1px solid grey
+  border-radius: 4px
+  outline: 0
+
+.chat__messages__list
+  div
+    li
+      background: $blue
+      border-radius: 12px
+      clear: both
+      color: $white
+      display: inline-block
+      font-size: 1.3em
+      font-weight: 300
+      margin: 3px 0
+      padding: 0.2em 1em
+
+.client
+  clear: both
+  float: right
+  margin-right: 10px
+
+.chat__messages__list
+  .server
+    color: $black
+    clear: both
+    float: left
+    margin-left: 10px
+    li
+      background: grey

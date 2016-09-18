@@ -1,0 +1,124 @@
+#landing
+  align-items: center
+  display: flex
+  background-size: cover
+  font-weight: 300
+  flex-direction: column
+  height: 100vh
+  justify-content: center
+
+  h1
+    font-size: 2.25em
+
+  .landing__intro
+    margin: 10px
+
+  form
+    input
+      display: block
+      width: 300px
+
+    button
+      width: 100%
+
+    input, button
+      font-size: 1.3em
+      margin-top: 10px
+      padding: 0.6em
+
+#chat
+  display: none
+  width: 75vw
+
+  .chat__header
+    border-bottom: 1px solid grey
+    display: flex
+    height: 10vh
+    text-align: center
+
+    h2
+      font-size: 1.5em
+      margin: 0 auto
+
+    i
+      color: $blue
+      cursor: pointer
+      float: right
+      margin-right: 20px
+
+    .chat__summary-toggle
+      &--black
+        color: black
+
+    h2, i
+      line-height: 10vh
+
+  .chat__messages
+    height: 80vh
+    overflow: auto
+    li
+      list-style-type: none
+
+  .chat__input-field
+    input
+      border-color: grey
+      border-radius: 0
+      height: 10vh
+      font-size: 1.5em
+      padding-left: 0.5em
+      width: 100vw
+
+  .chat__summary
+    background: $white
+    border-left: 1px solid grey
+    height: 100%
+    position: fixed
+    right: 0
+    top: 0
+    width: 25vw
+    h2
+      font-size: 1.5em
+
+    .chat__summary-header
+      display: block
+      height: 10vh
+      h2
+        display: block
+        line-height: 10vh
+        text-align: center
+        text-decoration: underline
+      .chat__summary-toggle--mobile-view
+        display: none
+
+  &.chat--expanded-view
+    width: 100vw
+
+@media screen and (max-width: 900px)
+  #chat
+    position: relative
+    width: 100vw
+    .chat__summary-toggle--desktop-view
+      display: none
+
+    .chat__summary
+      border: 1px solid grey
+      height: 90vh
+      left: 50%
+      position: absolute
+      transform: translateX(-50%)
+      width: 90vw
+      top: 0
+      bottom: 0
+      margin: auto
+      .chat__summary-header
+        display: flex
+        h2
+          display: inline-block
+          margin: 0 auto
+        .chat__summary-toggle--mobile-view
+          color: $blue
+          cursor: pointer
+          display: block
+          float: right
+          line-height: 10vh
+          margin-right: 20px
